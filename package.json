@@ -11,6 +11,7 @@
     "prepublish": "npm run build",
     "test": ""
   },
+  "bin": "./dist/src/index.js",
   "keywords": [
     "last-publish",
     "check-publish",
