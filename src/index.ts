@@ -4,7 +4,12 @@ import ora from "ora";
 import chalk from "chalk";
 import { formatDistance } from "date-fns";
 
-import fakePackageJSON from "./fake-package.json" assert { type: "json" };
+const fakePackageJSON = {
+  dependencies: {
+    lodash: "4.16.4",
+    react: "18.3.0",
+  },
+};
 
 const execPromise = util.promisify(exec);
 
