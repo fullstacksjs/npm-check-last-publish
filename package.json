@@ -12,6 +12,12 @@
     "test": ""
   },
   "bin": "./dist/src/index.js",
+  "files": [
+    "index.js",
+    "src/**/*.ts",
+    "dist/**/*.js",
+    "README.md"
+  ],
   "keywords": [
     "last-publish",
     "check-publish",
