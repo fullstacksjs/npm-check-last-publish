@@ -1,3 +1,5 @@
-# check package.json dependency last publish time
+# check dependency last publish time
 
-https://www.npmjs.com/package/npm-check-last-publish
+```bash
+npx npm-check-last-publish
+```
