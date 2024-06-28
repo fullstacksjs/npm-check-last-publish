@@ -1,6 +1,6 @@
 {
   "name": "npm-check-last-publish",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "check package.json dependency last publish time",
   "main": "./dist/src/index.js",
   "type": "module",
