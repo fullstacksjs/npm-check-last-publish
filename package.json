@@ -10,7 +10,10 @@
     "publish": "np",
     "test": ""
   },
-  "bin": "/dist/index.js",
+  "bin": {
+    "npm-check-last-publish": "/dist/index.js",
+    "nclp": "/dist/index.js"
+  },
   "files": [
     "index.js",
     "src/**/*.ts",
