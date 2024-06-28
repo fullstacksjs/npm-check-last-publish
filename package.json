@@ -1,0 +1,33 @@
+{
+  "name": "npm-check-last-publish",
+  "version": "0.1.0",
+  "description": "check package.json dependency last publish time",
+  "main": "./dist/src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx ./src/index.ts",
+    "build": "tsc"
+  },
+  "keywords": [
+    "last-publish",
+    "check-publish",
+    "package.json",
+    "npm",
+    "publish"
+  ],
+  "author": "Mahdi Sheibak",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@types/node": "20.14.9",
+    "chalk": "5.3.0",
+    "ora": "8.0.1",
+    "tsx": "4.15.8",
+    "typescript": "5.5.2",
+    "date-fns": "3.6.0"
+  },
+  "volta": {
+    "node": "20.15.0",
+    "npm": "10.8.1"
+  }
+}
