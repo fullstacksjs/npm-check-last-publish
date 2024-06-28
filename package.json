@@ -8,7 +8,6 @@
     "dev": "tsx ./src/index.ts",
     "build": "tsc",
     "publish": "np",
-    "prepublish": "npm run build",
     "test": ""
   },
   "bin": "./dist/src/index.js",
