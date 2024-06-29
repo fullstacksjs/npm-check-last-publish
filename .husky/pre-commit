@@ -1,4 +1,6 @@
-npm run cspell
+npm run check
+
+npm run spell
 
 npm run test
 

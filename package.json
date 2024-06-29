@@ -25,9 +25,9 @@
     "dev": "tsx src/index.ts",
     "release": "release-it",
     "test": "",
-    "prepublish": "npm run build",
-    "prepare": "husky",
-    "cspell": "cspell '**'"
+    "spell": "cspell '**'",
+    "check": "biome check --fix",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
