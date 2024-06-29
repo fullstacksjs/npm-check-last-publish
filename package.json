@@ -12,10 +12,10 @@
   "license": "MIT",
   "author": "Mahdi Sheibak <mahdi.zoraghi.sheibak@gmail.com>",
   "type": "module",
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": {
-    "nclp": "./dist/index.js",
-    "npm-check-last-publish": "./dist/index.js"
+    "nclp": "dist/index.js",
+    "npm-check-last-publish": "dist/index.js"
   },
   "files": [
     "dist/",
@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "tsx ./src/index.ts",
+    "dev": "tsx src/index.ts",
     "release": "release-it",
     "test": "",
     "prepublish": "npm run build"
