@@ -1,6 +1,6 @@
 {
 	"name": "npm-check-last-publish",
-	"version": "0.1.19",
+	"version": "0.1.20",
 	"description": "check dependencies last publish time",
 	"keywords": [
 		"last-publish",
@@ -16,7 +16,10 @@
 	"bin": {
 		"npm-check-last-publish": "dist/index.js"
 	},
-	"files": ["dist/", "README.md"],
+	"files": [
+		"dist/",
+		"README.md"
+	],
 	"scripts": {
 		"build": "tsc",
 		"check": "biome check --fix",
