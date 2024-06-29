@@ -71,7 +71,7 @@ export const getAveragePublishDays = (
 	publishedTimes: Record<string, string>,
 ) => {
 	const publishTimesList = Object.values(publishedTimes);
-	const pDValuesDates = publishTimesList
+	const totalPublishTimeDays = publishTimesList
 		.map((publishTime) => new Date(publishTime))
 		.sort((a, b) => {
 			return a.getTime() - b.getTime();
@@ -84,6 +84,6 @@ export const getAveragePublishDays = (
 		})
 		.reduce((a, b) => a + b, 0);
 
-	const days = Math.round(pDValuesDates / publishTimesList.length);
+	const days = Math.round(totalPublishTimeDays / publishTimesList.length);
 	return days;
 };
