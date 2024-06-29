@@ -48,5 +48,10 @@
   "volta": {
     "node": "20.15.0",
     "npm": "10.8.1"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    }
   }
 }
