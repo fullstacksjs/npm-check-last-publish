@@ -12,18 +12,15 @@
 	"license": "MIT",
 	"author": "Mahdi Sheibak <mahdi.zoraghi.sheibak@gmail.com>",
 	"type": "module",
-	"main": "dist/index.js",
+	"main": "dist/main.js",
 	"bin": {
-		"npm-check-last-publish": "dist/index.js"
+		"npm-check-last-publish": "dist/main.js"
 	},
-	"files": [
-		"dist/",
-		"README.md"
-	],
+	"files": ["dist/", "README.md"],
 	"scripts": {
 		"build": "tsc",
 		"check": "biome check --fix",
-		"dev": "tsx src/index.ts",
+		"dev": "tsx src/main.ts",
 		"prepare": "husky",
 		"release": "release-it",
 		"spell": "cspell '**'",

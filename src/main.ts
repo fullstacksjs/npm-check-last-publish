@@ -4,14 +4,12 @@ import chalk from "chalk";
 import Table from "cli-table3";
 import { differenceInDays, formatDistance } from "date-fns";
 
-import { GREEN_AREA, RED_AREA, YELLOW_AREA } from "./area.js";
+import { GREEN_AREA, RED_AREA, YELLOW_AREA } from "./lib/area.js";
+import { getAllDependencies } from "./lib/get-all-dependencies.js";
+import { getAveragePublishDays } from "./lib/get-average-publish-days.js";
+import { getPackagePublishDate } from "./lib/get-package-publish-date.js";
+import { loading } from "./lib/loading.js";
 import type { Area, DependencyInfo } from "./types.js";
-import {
-	getAllDependencies,
-	getAveragePublishDays,
-	getPackagePublishDate,
-	loading,
-} from "./utils.js";
 
 const allDependencies = await getAllDependencies();
 
