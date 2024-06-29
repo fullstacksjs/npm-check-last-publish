@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import chalk from "chalk";
+import Table from "cli-table3";
 import { differenceInDays, formatDistance } from "date-fns";
 
 import { GREEN_AREA, RED_AREA, YELLOW_AREA } from "./area.js";
@@ -53,6 +54,15 @@ for (const packageInfo of infoList) {
 
 loading.stop();
 
+const table = new Table({
+	head: [
+		chalk.white("Name"),
+		chalk.white("Version"),
+		chalk.white("Date"),
+		chalk.white("Average"),
+	],
+});
+
 for (const dependencyInfo of dependenciesInformation) {
 	const dependencyArea = chalk[dependencyInfo.area];
 
@@ -62,12 +72,12 @@ for (const dependencyInfo of dependenciesInformation) {
 		addSuffix: true,
 	});
 
-	console.log(
-		dependencyArea(
-			name.padEnd(30),
-			version.padEnd(30),
-			formattedDate.padEnd(30),
-		),
-		chalk.gray(`avg: every ${averagePublishDays} days`),
-	);
+	table.push([
+		dependencyArea(name),
+		dependencyArea(version),
+		dependencyArea(formattedDate),
+		chalk.hex("#2dd4bf")(`every ${averagePublishDays} days`),
+	]);
 }
+
+console.log(table.toString());
