@@ -1,6 +1,6 @@
 {
   "name": "npm-check-last-publish",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "check dependencies last publish time",
   "keywords": [
     "last-publish",
