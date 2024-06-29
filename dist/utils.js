@@ -1,6 +1,7 @@
 import { exec } from "node:child_process";
 import fsPromises from "node:fs/promises";
 import util from "node:util";
+import { differenceInDays } from "date-fns";
 import ora from "ora";
 const execPromise = util.promisify(exec);
 const readPackageJson = async () => {
@@ -31,7 +32,7 @@ export const getPackagePublishDate = async (packageName) => {
     const packageVersion = await getPackageVersion(packageName);
     const publishedTimes = await getPublishedTimes(packageName);
     const packagePublishDate = publishedTimes[packageVersion];
-    return { packagePublishDate, packageVersion, packageName };
+    return { packagePublishDate, packageVersion, packageName, publishedTimes };
 };
 let oraSpinner = null;
 export const loading = {
@@ -44,4 +45,21 @@ export const loading = {
         oraSpinner?.clear();
         console.timeEnd();
     },
+};
+export const getAveragePublishDays = (publishedTimes) => {
+    const publishTimesList = Object.values(publishedTimes);
+    const pDValuesDates = publishTimesList
+        .map((publishTime) => new Date(publishTime))
+        .sort((a, b) => {
+        return a.getTime() - b.getTime();
+    })
+        .map((publishTime, index, publishTimesArray) => {
+        let nextPublishTime = publishTimesArray[index + 1];
+        if (!nextPublishTime)
+            nextPublishTime = new Date();
+        return differenceInDays(nextPublishTime, publishTime);
+    })
+        .reduce((a, b) => a + b, 0);
+    const days = Math.round(pDValuesDates / publishTimesList.length);
+    return days;
 };
