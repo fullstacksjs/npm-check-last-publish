@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // import { exec } from "node:child_process";
 // import util from "node:util";
 // import ora from "ora";
@@ -81,3 +83,17 @@
 // }
 
 console.log("hi from cli");
+
+function sum(a: number, b: number) {
+  return a + b;
+}
+
+function main() {
+  console.log("Hello from main");
+}
+
+if (require.main === module) {
+  main();
+}
+
+export { sum };
