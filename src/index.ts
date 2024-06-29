@@ -13,10 +13,18 @@ const dependenciesInformation: DependencyInfo[] = [];
 
 loading.start();
 
+const dependenciesInfoPremissList: DependenciesInfoPremiss = [];
+
+type DependenciesInfoPremiss = ReturnType<typeof getPackagePublishDate>[];
+
 for (const packageName of Object.keys(allDependencies)) {
-  const { packagePublishDate, packageVersion } = await getPackagePublishDate(
-    packageName
-  );
+  dependenciesInfoPremissList.push(getPackagePublishDate(packageName));
+}
+
+const infoList = await Promise.all(dependenciesInfoPremissList);
+
+for (const packageInfo of infoList) {
+  const { packagePublishDate, packageVersion, packageName } = packageInfo;
 
   const diffInDays = differenceInDays(new Date(), new Date(packagePublishDate));
 

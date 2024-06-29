@@ -50,7 +50,7 @@ export const getPackagePublishDate = async (packageName: string) => {
   const packageVersion = await getPackageVersion(packageName);
   const publishedTimes = await getPublishedTimes(packageName);
   const packagePublishDate = publishedTimes[packageVersion];
-  return { packagePublishDate, packageVersion };
+  return { packagePublishDate, packageVersion, packageName };
 };
 
 let oraSpinner: null | Ora = null;
