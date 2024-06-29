@@ -14,7 +14,6 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "nclp": "dist/index.js",
     "npm-check-last-publish": "dist/index.js"
   },
   "files": [
