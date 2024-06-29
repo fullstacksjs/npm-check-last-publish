@@ -1,4 +1,4 @@
-# check dependency last publish time
+# check dependencies last publish time
 
 ```bash
 npx npm-check-last-publish

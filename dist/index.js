@@ -62,6 +62,4 @@
 //   console.log(name.padEnd(30), version.padEnd(30), date.padEnd(30));
 // }
 console.log("hi from cli");
-export const testCode = () => {
-    console.log("test code");
-};
+export {};
