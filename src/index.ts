@@ -81,3 +81,7 @@
 // }
 
 console.log("hi from cli");
+
+export const testCode = () => {
+  console.log("test code");
+};
