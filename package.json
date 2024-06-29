@@ -14,7 +14,7 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "npm-check-last-publish": "dist/index.js"
+    "npm-check-last-publish": "node dist/index.js"
   },
   "files": [
     "dist/",
