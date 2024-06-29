@@ -13,9 +13,8 @@ const dependenciesInformation: DependencyInfo[] = [];
 
 loading.start();
 
-const dependenciesInfoPremissList: DependenciesInfoPremiss = [];
-
-type DependenciesInfoPremiss = ReturnType<typeof getPackagePublishDate>[];
+const dependenciesInfoPremissList: ReturnType<typeof getPackagePublishDate>[] =
+  [];
 
 for (const packageName of Object.keys(allDependencies)) {
   dependenciesInfoPremissList.push(getPackagePublishDate(packageName));
