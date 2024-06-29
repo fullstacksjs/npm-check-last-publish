@@ -5,3 +5,5 @@ npm run spell
 npm run test
 
 npm run build
+
+git add dist/

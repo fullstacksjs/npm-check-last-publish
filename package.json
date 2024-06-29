@@ -22,12 +22,18 @@
   ],
   "scripts": {
     "build": "tsc",
+    "check": "biome check --fix --staged",
+    "check:full": "biome check --fix",
     "dev": "tsx src/index.ts",
+    "prepare": "husky",
     "release": "release-it",
-    "test": "",
     "spell": "cspell '**'",
-    "check": "biome check --fix",
-    "prepare": "husky"
+    "test": ""
+  },
+  "dependencies": {
+    "chalk": "5.3.0",
+    "date-fns": "3.6.0",
+    "ora": "8.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
@@ -39,11 +45,6 @@
     "release-it": "17.4.0",
     "tsx": "4.15.8",
     "typescript": "5.5.2"
-  },
-  "dependencies": {
-    "chalk": "5.3.0",
-    "date-fns": "3.6.0",
-    "ora": "8.0.1"
   },
   "volta": {
     "node": "20.15.0",
