@@ -16,10 +16,7 @@
 	"bin": {
 		"npm-check-last-publish": "dist/index.js"
 	},
-	"files": [
-		"dist/",
-		"README.md"
-	],
+	"files": ["dist/", "README.md"],
 	"scripts": {
 		"build": "tsc",
 		"check": "biome check --fix",
