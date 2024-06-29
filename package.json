@@ -25,11 +25,17 @@
     "dev": "tsx src/index.ts",
     "release": "release-it",
     "test": "",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "prepare": "husky",
+    "cspell": "cspell '**'"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
+    "@commitlint/cli": "19.3.0",
+    "@commitlint/config-conventional": "19.2.2",
     "@types/node": "20.14.9",
+    "cspell": "8.9.1",
+    "husky": "9.0.11",
     "release-it": "17.4.0",
     "tsx": "4.15.8",
     "typescript": "5.5.2"

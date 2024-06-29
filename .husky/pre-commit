@@ -1,0 +1,5 @@
+npm run cspell
+
+npm run test
+
+npm run build
