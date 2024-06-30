@@ -1,5 +1,0 @@
-biomejs
-commitlint
-Sheibak
-codepaths
-tsbuildinfo
