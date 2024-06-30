@@ -19,11 +19,11 @@
   "files": ["dist/", "README.md"],
   "scripts": {
     "build": "tsc",
-    "check": "biome check --fix",
+    "check": "biome check . --write",
     "dev": "tsx src/main.ts",
     "prepare": "husky",
     "release": "release-it",
-    "spell": "cspell '**'",
+    "spell": "cspell .",
     "test": ""
   },
   "dependencies": {
