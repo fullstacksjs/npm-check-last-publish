@@ -25,7 +25,8 @@
 		"prepare": "husky",
 		"release": "release-it",
 		"spell": "cspell '**'",
-		"test": ""
+		"test": "tsx --test ./src/**/*.test.ts",
+		"test:watch": "tsx --test --watch ./src/**/*.test.ts"
 	},
 	"dependencies": {
 		"chalk": "5.3.0",
