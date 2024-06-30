@@ -19,7 +19,8 @@
 	"files": ["dist/", "README.md"],
 	"scripts": {
 		"build": "tsc",
-		"check": "biome check --fix",
+		"check": "biome check",
+		"fix": "biome check --fix",
 		"dev": "tsx src/main.ts",
 		"prepare": "husky",
 		"release": "release-it",
