@@ -3,3 +3,5 @@
 ```bash
 npx npm-check-last-publish
 ```
+
+![report screenshot](./assets/report-screenshot.png)
