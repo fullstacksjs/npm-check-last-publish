@@ -22,7 +22,6 @@
     "check": "biome check . --write",
     "dev": "tsx src/main.ts",
     "prepare": "husky",
-    "release": "release-it",
     "spell": "cspell .",
     "test": ""
   },
@@ -39,17 +38,15 @@
     "@types/node": "20.14.9",
     "cspell": "8.9.1",
     "husky": "9.0.11",
-    "release-it": "17.4.0",
+    "semantic-release": "24.0.0",
     "tsx": "4.15.8",
     "typescript": "5.5.2"
+  },
+  "engines": {
+    "node": ">=16"
   },
   "volta": {
     "node": "20.15.0",
     "npm": "10.8.1"
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release v${version}"
-    }
   }
 }
