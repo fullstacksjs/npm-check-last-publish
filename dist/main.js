@@ -18,7 +18,7 @@ const infoList = await Promise.all(dependenciesInfoPremissList);
 for (const packageInfo of infoList) {
     const { packagePublishDate, packageVersion, packageName, publishedTimes } = packageInfo;
     const averagePublishDays = getAveragePublishDays(publishedTimes);
-    const diffDays = differenceInDays(new Date(), new Date(packagePublishDate));
+    const diffDays = differenceInDays(new Date(), packagePublishDate);
     let area = "red";
     if (GREEN_AREA(diffDays))
         area = "green";
@@ -35,6 +35,7 @@ for (const packageInfo of infoList) {
         averagePublishDays,
     });
 }
+dependenciesInformation.sort((a, b) => a.date.getTime() - b.date.getTime());
 loading.stop();
 const table = new Table({
     head: [

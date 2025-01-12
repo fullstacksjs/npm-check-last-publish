@@ -32,7 +32,7 @@ for (const packageInfo of infoList) {
 
   const averagePublishDays = getAveragePublishDays(publishedTimes);
 
-  const diffDays = differenceInDays(new Date(), new Date(packagePublishDate));
+  const diffDays = differenceInDays(new Date(), packagePublishDate);
 
   let area: Area = "red";
 
@@ -49,6 +49,8 @@ for (const packageInfo of infoList) {
     averagePublishDays,
   });
 }
+
+dependenciesInformation.sort((a, b) => a.date.getTime() - b.date.getTime());
 
 loading.stop();
 
