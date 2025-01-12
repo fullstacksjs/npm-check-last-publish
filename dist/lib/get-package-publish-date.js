@@ -3,6 +3,6 @@ import { getPublishedTimes } from "./get-published-times.js";
 export const getPackagePublishDate = async (packageName) => {
     const packageVersion = await getPackageVersion(packageName);
     const publishedTimes = await getPublishedTimes(packageName);
-    const packagePublishDate = publishedTimes[packageVersion];
+    const packagePublishDate = new Date(publishedTimes[packageVersion]);
     return { packagePublishDate, packageVersion, packageName, publishedTimes };
 };
