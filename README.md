@@ -8,26 +8,11 @@ A simple CLI tool that helps developers check the last published versions of the
 
 ![report screenshot](./assets/report-screenshot.png)
 
-## Installation
-Simply use npx to run it without installing it globally:
-```bash
-npx npm-check-last-publish
-```
-
-Or install it globally:
-```bash
-npm install -g npm-check-last-publish
-```
-
 ## Usage
 Just navigate to your project directory and run:
 ```bash
 npx npm-check-last-publish
 ```
-### Why Use This Tool?
-- Quickly check outdated dependencies.
-- Improve security by keeping dependencies up to date.
-- Avoid compatibility issues caused by outdated packages.
 
 ## How to Contribute
 All contributions are welcome to further enhance this project. Whether you’re fixing an issue, adding a feature or improving the documentation, are much valued.
@@ -41,4 +26,4 @@ Before submitting a pull request, please make sure the following is done:
 6. Create a pull request (PR) against the `main` branch of this repository.
 
 ### Issues and Bug Reports
-If you find any bugs or issues, please [create a new issue]([https://github.com/yourusername/yourproject/issues](https://github.com/fullstacksjs/npm-check-last-publish/issues/new)) on GitHub. Include as much detail as possible to help us understand and reproduce the problem.
+If you find any bugs or issues, please [create a new issue](https://github.com/fullstacksjs/npm-check-last-publish/issues/new) on GitHub. Include as much detail as possible to help us understand and reproduce the problem.
