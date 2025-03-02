@@ -14,7 +14,7 @@ A simple CLI tool that helps developers check the last published versions of the
 - Shows the last published time, average and version of each dependency.
 - Helps developers keep their dependencies up to date.
 
-![report screenshot](https://github.com/fullstacksjs/npm-check-last-publish/blob/main/assets/demo.png?raw=true#gh-light-mode-only)
+![report screenshot](https://github.com/fullstacksjs/npm-check-last-publish/blob/main/assets/demo.png?raw=true)
 
 ## Usage
 Just navigate to your project directory and run:
