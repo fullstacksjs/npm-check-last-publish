@@ -1,11 +1,7 @@
 set -e
 
-npm run check -- --staged
-
+npx --no-install biome check --staged --no-errors-on-unmatched
 npm run spell
-
 npm run test
-
 npm run build
 
-git add dist/

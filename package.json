@@ -1,7 +1,7 @@
 {
   "name": "npm-check-last-publish",
   "version": "0.1.22",
-  "description": "check dependencies last publish time",
+  "description": "A simple CLI tool that helps developers check the last published versions of their project dependencies.",
   "keywords": [
     "last-publish",
     "check-publish",
