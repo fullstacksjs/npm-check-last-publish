@@ -76,7 +76,9 @@ for (const dependencyInfo of dependenciesInformation) {
     dependencyArea(name),
     dependencyArea(version),
     dependencyArea(formattedDate),
-    chalk.hex("#2dd4bf")(`every ${averagePublishDays} days`),
+    chalk.hex("#2dd4bf")(
+      averagePublishDays === 1 ? "daily" : `every ${averagePublishDays} days`,
+    ),
   ]);
 }
 
