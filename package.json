@@ -16,7 +16,10 @@
   "bin": {
     "npm-check-last-publish": "dist/main.js"
   },
-  "files": ["dist/", "README.md"],
+  "files": [
+    "dist/",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "check": "biome check . --write",
@@ -30,26 +33,21 @@
     "chalk": "5.4.1",
     "cli-table3": "0.6.5",
     "date-fns": "4.1.0",
-    "ora": "8.1.1"
+    "ora": "8.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@commitlint/cli": "19.6.1",
-    "@commitlint/config-conventional": "19.6.0",
-    "@types/node": "22.10.5",
-    "cspell": "8.17.1",
+    "@biomejs/biome": "2.1.2",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "@types/node": "24.1.0",
+    "cspell": "9.2.0",
     "husky": "9.1.7",
-    "release-it": "18.1.1",
-    "tsx": "4.19.2",
-    "typescript": "5.7.3"
+    "release-it": "19.0.4",
+    "tsx": "4.20.3",
+    "typescript": "5.8.3"
   },
   "volta": {
     "node": "20.15.0",
-    "npm": "10.8.1"
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release v${version}"
-    }
+    "npm": "10.8.2"
   }
 }

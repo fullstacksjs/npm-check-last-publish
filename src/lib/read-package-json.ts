@@ -8,7 +8,7 @@ export const readPackageJson = async () => {
     packageContent = await fsPromises.readFile("package.json", {
       encoding: "utf8",
     });
-  } catch (error) {
+  } catch (_error) {
     console.log(
       chalk.redBright(
         `[ERROR]: Cannot find ${chalk.bold(
