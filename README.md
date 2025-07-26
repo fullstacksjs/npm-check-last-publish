@@ -22,6 +22,13 @@ Just navigate to your project directory and run:
 npx npm-check-last-publish
 ```
 
+## Check Specific Packages
+You can also check specific packages by passing their names as arguments:
+```bash
+npx npm-check-last-publish zod react
+‍‍‍```
+This will only show the publish information for the given packages, instead of all project dependencies.
+
 ## How to Contribute
 All contributions are welcome to further enhance this project. Whether you’re fixing an issue, adding a feature or improving the documentation, are much valued.
 
