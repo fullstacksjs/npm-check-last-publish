@@ -8,3 +8,10 @@ export type DependencyInfo = {
   area: Area;
   averagePublishDays: number;
 };
+
+export type PackagePublishInfo = {
+  packageName: string;
+  packageVersion: string;
+  packagePublishDate: Date;
+  publishedTimes: Record<string, string>;
+};
