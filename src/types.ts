@@ -1,6 +1,6 @@
 export type Area = "red" | "green" | "yellow";
 
-export type DependencyInfo = {
+export type PackageInfo = {
   name: string;
   version: string;
   date: Date;
