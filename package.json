@@ -2,6 +2,10 @@
   "name": "npm-check-last-publish",
   "version": "0.1.22",
   "description": "A simple CLI tool that helps developers check the last published versions of their project dependencies.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fullstacksjs/npm-check-last-publish"
+  },
   "keywords": [
     "last-publish",
     "check-publish",
