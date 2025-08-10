@@ -28,6 +28,30 @@ To check packages not listed in your `package.json`, just pass their names:
 npx npm-check-last-publish zod react
 ```
 
+## CLI Options
+| Option          | Description                              | Default | Allowed Values            |
+| --------------- | ---------------------------------------- | ------- | ------------------------- |
+| `--sort <TYPE>` | Sort packages by a specific field        | `date`  | `name`, `date`, `average` |
+| `--order <DIR>` | Sort direction (ascending or descending) | `asc`   | `asc`, `desc`             |
+
+## Examples
+### Check all local dependencies
+```bash
+npx npm-check-last-publish
+```
+### Check specific packages
+```bash
+npx npm-check-last-publish zod react
+```
+### Sort alphabetically
+```bash
+npx npm-check-last-publish --sort name
+```
+### Sort by average publish frequency, descending
+```bash
+npx npm-check-last-publish --sort average --order desc zod react cspell
+```
+
 ## Help
 Run the following command to see usage and available options:
 ```bash

@@ -1,4 +1,4 @@
-export type Area = "red" | "green" | "yellow";
+import type { Area } from "./lib/get-color-area.js";
 
 export type PackageInfo = {
   name: string;
@@ -15,3 +15,6 @@ export type PackagePublishInfo = {
   packagePublishDate: Date;
   publishedTimes: Record<string, string>;
 };
+
+export type SortBy = "name" | "date" | "average";
+export type SortOrder = "asc" | "desc";
