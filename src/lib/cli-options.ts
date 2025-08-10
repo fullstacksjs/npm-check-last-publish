@@ -2,10 +2,26 @@ import { Command } from "commander";
 import pkg from "../../package.json" with { type: "json" };
 import type { SortBy, SortOrder } from "../types.js";
 
-export function getCliOptions() {
-  const program = new Command();
+const VALID_SORT_BY: SortBy[] = ["name", "date", "average"];
+const VALID_SORT_ORDER: SortOrder[] = ["asc", "desc"];
 
-  program
+function validateOption<T extends string>(
+  value: string,
+  validValues: readonly T[],
+  optionName: string,
+): T {
+  const lowerValue = value.toLowerCase() as T;
+  if (!validValues.includes(lowerValue)) {
+    console.error(
+      `Invalid --${optionName}: '${value}'. Must be one of: ${validValues.join(", ")}`,
+    );
+    process.exit(1);
+  }
+  return lowerValue;
+}
+
+export function getCliOptions() {
+  const program = new Command()
     .name(pkg.name)
     .description(pkg.description)
     .version(pkg.version)
@@ -14,8 +30,12 @@ export function getCliOptions() {
       "[packages...]",
       "Optional. Names of packages to check. If omitted, all local dependencies will be used.",
     )
-    .option("--sort <TYPE>", "Sort by: name, date, or average", "date")
-    .option("--order <DIRECTION>", "Sort order: asc or desc", "asc")
+    .option("--sort <TYPE>", `Sort by: ${VALID_SORT_BY.join(", ")}`, "date")
+    .option(
+      "--order <DIRECTION>",
+      `Sort order: ${VALID_SORT_ORDER.join(", ")}`,
+      "asc",
+    )
     .helpOption("-h, --help", "Show help")
     .addHelpText(
       "after",
@@ -28,32 +48,12 @@ Examples:
     )
     .parse(process.argv);
 
+  const { sort, order } = program.opts<{ sort: SortBy; order: SortOrder }>();
   const packages = program.args;
-  const opts = program.opts();
-
-  const sortBy = opts.sort.toLowerCase();
-  const sortOrder = opts.order.toLowerCase();
-
-  const validSortBy: SortBy[] = ["name", "date", "average"];
-  const validSortOrder: SortOrder[] = ["asc", "desc"];
-
-  if (!validSortBy.includes(sortBy)) {
-    console.error(
-      `Invalid --sort: '${sortBy}'. Must be one of: ${validSortBy.join(", ")}`,
-    );
-    process.exit(1);
-  }
-
-  if (!validSortOrder.includes(sortOrder)) {
-    console.error(
-      `Invalid --order: '${sortOrder}'. Must be ${validSortOrder.join(", ")}.`,
-    );
-    process.exit(1);
-  }
 
   return {
     packages,
-    sortBy: sortBy as SortBy,
-    sortOrder: sortOrder as SortOrder,
+    sortBy: validateOption(sort, VALID_SORT_BY, "sort"),
+    sortOrder: validateOption(order, VALID_SORT_ORDER, "order"),
   };
 }
