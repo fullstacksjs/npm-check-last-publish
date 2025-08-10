@@ -36,6 +36,7 @@ export function getCliOptions() {
       `Sort order: ${VALID_SORT_ORDER.join(", ")}`,
       "asc",
     )
+    .option("--pattern", "Enable wildcard pattern matching for package names")
     .helpOption("-h, --help", "Show help")
     .addHelpText(
       "after",
@@ -44,15 +45,22 @@ Examples:
   $ npm-check-last-publish --sort name --order asc
   $ npm-check-last-publish --sort average
   $ npm-check-last-publish        # defaults to --sort date --order asc
+  $ npm-check-last-publish --pattern "@types/*"
+  $ npm-check-last-publish --pattern "react-*"
 `,
     )
     .parse(process.argv);
 
-  const { sort, order } = program.opts<{ sort: SortBy; order: SortOrder }>();
+  const { sort, order, pattern } = program.opts<{
+    sort: SortBy;
+    order: SortOrder;
+    pattern: boolean;
+  }>();
   const packages = program.args;
 
   return {
     packages,
+    pattern,
     sortBy: validateOption(sort, VALID_SORT_BY, "sort"),
     sortOrder: validateOption(order, VALID_SORT_ORDER, "order"),
   };
