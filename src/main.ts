@@ -9,11 +9,11 @@ import { renderTable } from "./lib/render-table.js";
 
 async function main() {
   try {
-    const { packages, sortBy, sortOrder } = getCliOptions();
+    const { packages, sortBy, sortOrder, pattern } = getCliOptions();
 
     loading.start();
 
-    const { results, errors } = await fetchPackageInfoList(packages);
+    const { results, errors } = await fetchPackageInfoList(packages, pattern);
     loading.stop();
 
     const sortedInfo = processPackageData(

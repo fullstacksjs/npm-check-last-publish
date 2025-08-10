@@ -33,23 +33,23 @@ npx npm-check-last-publish zod react
 | --------------- | ---------------------------------------- | ------- | ------------------------- |
 | `--sort <TYPE>` | Sort packages by a specific field        | `date`  | `name`, `date`, `average` |
 | `--order <DIR>` | Sort direction (ascending or descending) | `asc`   | `asc`, `desc`             |
+| `--pattern` | 	Enable wildcard pattern matching for package names (only applies to dependencies listed in your project)  | (off)   |              |
 
 ## Examples
-### Check all local dependencies
-```bash
-npx npm-check-last-publish
-```
-### Check specific packages
-```bash
-npx npm-check-last-publish zod react
-```
-### Sort alphabetically
+#### Sort alphabetically
 ```bash
 npx npm-check-last-publish --sort name
 ```
-### Sort by average publish frequency, descending
+#### Sort by average publish frequency, descending
 ```bash
 npx npm-check-last-publish --sort average --order desc zod react cspell
+```
+#### Check packages matching a wildcard pattern
+```bash
+npx npm-check-last-publish --pattern "@types/*"
+```
+```bash
+npx npm-check-last-publish --pattern "react-*"
 ```
 
 ## Help
