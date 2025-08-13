@@ -2,6 +2,7 @@ import type { PackagePublishInfo } from "../types.js";
 import { expandPackagePatterns } from "./expand-package-patterns.js";
 import { getAllDependencies } from "./get-all-dependencies.js";
 import { getPackagePublishDate } from "./get-package-publish-date.js";
+import { progressBar } from "./progress-bar.js";
 
 type PackageInfoResult = {
   results: (PackagePublishInfo | null)[];
@@ -30,19 +31,24 @@ export async function fetchPackageInfoList(
   }
 
   const errors: { package: string; error: Error }[] = [];
+  const results: (PackagePublishInfo | null)[] = [];
 
-  const results = await Promise.all(
-    packagesToCheck.map(async (pkgName) => {
-      try {
-        return await getPackagePublishDate(pkgName);
-      } catch (err) {
-        const message =
-          err instanceof Error ? err.message.split("\n")[0] : String(err);
-        errors.push({ package: pkgName, error: new Error(message) });
-        return null;
-      }
-    }),
-  );
+  progressBar.start(packagesToCheck.length, 0);
+
+  for (const pkgName of packagesToCheck) {
+    try {
+      const info = await getPackagePublishDate(pkgName);
+      results.push(info);
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message.split("\n")[0] : String(err);
+      errors.push({ package: pkgName, error: new Error(message) });
+      results.push(null);
+    }
+    progressBar.increment();
+  }
+
+  progressBar.stop();
 
   return { results, errors };
 }
