@@ -9,15 +9,18 @@ import { renderTable } from "./lib/render-table.js";
 
 async function main() {
   try {
-    const { packages, sortBy, sortOrder, pattern } = getCliOptions();
+    const { packages, sortBy, sortOrder, pattern, colors, thresholds } =
+      getCliOptions();
 
     const { results, errors } = await fetchPackageInfoList(packages, pattern);
 
-    const sortedInfo = processPackageData(
-      results.filter((r) => r !== null),
+    const sortedInfo = processPackageData({
+      results: results.filter((r) => r !== null),
       sortBy,
       sortOrder,
-    );
+      thresholds,
+      colors,
+    });
 
     renderTable(sortedInfo);
 

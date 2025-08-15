@@ -1,4 +1,6 @@
-import type { Area } from "./lib/get-color-area.js";
+import type { ForegroundColorName } from "chalk";
+
+export type Area = string;
 
 export type PackageInfo = {
   name: string;
@@ -18,3 +20,13 @@ export type PackagePublishInfo = {
 
 export type SortBy = "name" | "date" | "average";
 export type SortOrder = "asc" | "desc";
+export type ColorOption = ForegroundColorName | `#${string}`;
+export interface Thresholds {
+  warn: number;
+  error: number;
+}
+export interface Colors {
+  safe: ColorOption;
+  warn: ColorOption;
+  error: ColorOption;
+}
