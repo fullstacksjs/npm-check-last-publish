@@ -1,9 +1,24 @@
 import { differenceInDays } from "date-fns";
-import type { PackageInfo, PackagePublishInfo } from "../types.js";
+import type {
+  Colors,
+  PackageInfo,
+  PackagePublishInfo,
+  Thresholds,
+} from "../types.js";
 import { getAveragePublishDays } from "./get-average-publish-days.js";
 import { getColorArea } from "./get-color-area.js";
 
-export function formatPackageInfo(pkg: PackagePublishInfo): PackageInfo {
+interface FormatPackageOptions {
+  pkg: PackagePublishInfo;
+  thresholds: Thresholds;
+  colors: Colors;
+}
+
+export function formatPackageInfo({
+  pkg,
+  thresholds,
+  colors,
+}: FormatPackageOptions): PackageInfo {
   const { packageName, packagePublishDate, packageVersion, publishedTimes } =
     pkg;
 
@@ -15,7 +30,7 @@ export function formatPackageInfo(pkg: PackagePublishInfo): PackageInfo {
     version: packageVersion,
     date: packagePublishDate,
     diffDays,
-    area: getColorArea(diffDays),
+    area: getColorArea({ diffDays, thresholds, colors }),
     averagePublishDays,
   };
 }
