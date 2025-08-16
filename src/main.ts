@@ -9,7 +9,7 @@ import { renderTable } from "./lib/render-table.js";
 
 async function main() {
   try {
-    const { packages, sortBy, sortOrder, pattern, colors, thresholds } =
+    const { packages, sortBy, sortOrder, pattern, thresholds } =
       getCliOptions();
 
     const { results, errors } = await fetchPackageInfoList(packages, pattern);
@@ -19,7 +19,6 @@ async function main() {
       sortBy,
       sortOrder,
       thresholds,
-      colors,
     });
 
     renderTable(sortedInfo);

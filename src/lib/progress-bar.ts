@@ -3,9 +3,7 @@ import cliProgress from "cli-progress";
 
 export const progressBar = new cliProgress.SingleBar(
   {
-    format: `Loading ${chalk.cyanBright([
-      "{bar}",
-    ])} {percentage}% | {value}/{total} ${chalk.gray("packages")}`,
+    format: `${chalk.cyanBright(["{bar}"])} {percentage}% | {value}/{total}`,
     hideCursor: true,
   },
   cliProgress.Presets.legacy,

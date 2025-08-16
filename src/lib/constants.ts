@@ -1,15 +1,21 @@
-import type { Colors, SortBy, SortOrder, Thresholds } from "../types.js";
+import type {
+  Area,
+  SortBy,
+  SortOrder,
+  TerminalColor,
+  Thresholds,
+} from "../types.js";
 
 export const DEFAULT_THRESHOLDS: Thresholds = {
   warn: 180,
   error: 365,
 };
 
-export const DEFAULT_COLORS: Colors = {
+export const AREA_COLORS: Record<Area, TerminalColor> = {
   safe: "green",
   warn: "yellow",
   error: "red",
-};
+} as const;
 
 export const VALID_SORT_BY: SortBy[] = ["name", "date", "average"];
 export const VALID_SORT_ORDER: SortOrder[] = ["asc", "desc"];
