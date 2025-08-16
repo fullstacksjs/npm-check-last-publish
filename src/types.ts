@@ -1,13 +1,12 @@
-import type { ForegroundColorName } from "chalk";
-
-export type Area = string;
+export type Area = "safe" | "warn" | "error";
+export type TerminalColor = "green" | "yellow" | "red";
 
 export type PackageInfo = {
   name: string;
   version: string;
   date: Date;
   diffDays: number;
-  area: Area;
+  area: TerminalColor;
   averagePublishDays: number;
 };
 
@@ -20,13 +19,7 @@ export type PackagePublishInfo = {
 
 export type SortBy = "name" | "date" | "average";
 export type SortOrder = "asc" | "desc";
-export type ColorOption = ForegroundColorName | `#${string}`;
 export interface Thresholds {
   warn: number;
   error: number;
-}
-export interface Colors {
-  safe: ColorOption;
-  warn: ColorOption;
-  error: ColorOption;
 }

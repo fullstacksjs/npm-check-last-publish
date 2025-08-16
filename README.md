@@ -14,7 +14,7 @@ A simple CLI tool that helps developers check the last published versions of the
 - Shows the last published time, average and version of each dependency.
 - Helps developers keep their dependencies up to date.
 - Supports wildcard pattern matching for package names.
-- Customizable warning/error day thresholds and colors (supports named colors or HEX).
+- Customizable warning/error day thresholds.
 
 ![report screenshot](https://github.com/fullstacksjs/npm-check-last-publish/blob/main/assets/demo.png?raw=true)
 
@@ -38,9 +38,6 @@ npx npm-check-last-publish zod react
 | `--pattern`             | Enable wildcard pattern matching for package names | (off)    | Glob pattern, e.g., `"react-*"` or `"@types/*"`                                                                         |
 | `--warn-days <NUMBER>`  | Days threshold for warning                         | `180`     | Any positive integer                                                        |
 | `--error-days <NUMBER>` | Days threshold for error                           | `365`    | Any positive integer                                                        |
-| `--safe-color <COLOR>`  | Color for safe zone (named or HEX)                 | `green`  | Any [chalk named color](https://github.com/chalk/chalk#colors) or `#RRGGBB` |
-| `--warn-color <COLOR>`  | Color for warning zone (named or HEX)              | `yellow` | Any [chalk named color](https://github.com/chalk/chalk#colors) or `#RRGGBB`                                                                |
-| `--error-color <COLOR>` | Color for error zone (named or HEX)                | `red`    | Any [chalk named color](https://github.com/chalk/chalk#colors) or `#RRGGBB`                                                                |
 
 ## Examples
 #### Sort alphabetically
@@ -61,14 +58,6 @@ npx npm-check-last-publish --pattern "react-*"
 #### Customize warning and error thresholds
 ```bash
 npx npm-check-last-publish --warn-days 60 --error-days 120
-```
-#### Use custom colors (named)
-```bash
-npx npm-check-last-publish --safe-color green --warn-color yellow --error-color red
-```
-#### Use custom colors (HEX)
-```bash
-npx npm-check-last-publish --safe-color "#00ff00" --warn-color "#ffff00" --error-color "#ff0000"
 ```
 
 ## Help

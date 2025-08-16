@@ -1,5 +1,4 @@
 import type {
-  Colors,
   PackagePublishInfo,
   SortBy,
   SortOrder,
@@ -13,7 +12,6 @@ interface ProcessPackageOptions {
   sortBy: SortBy;
   sortOrder: SortOrder;
   thresholds: Thresholds;
-  colors: Colors;
 }
 
 function isDefined<T>(value: T | undefined | null): value is T {
@@ -25,11 +23,10 @@ export function processPackageData({
   sortBy,
   sortOrder,
   thresholds,
-  colors,
 }: ProcessPackageOptions) {
   const validResults = results.filter(isDefined);
   const formatted = validResults.map((pkg) =>
-    formatPackageInfo({ pkg, thresholds, colors }),
+    formatPackageInfo({ pkg, thresholds }),
   );
   return sortPackages(formatted, sortBy, sortOrder);
 }
