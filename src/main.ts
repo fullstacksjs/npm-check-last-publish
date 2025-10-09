@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import chalk from "chalk";
+import { styleText } from "node:util";
 import { getCliOptions } from "./lib/cli-options.js";
 import { fetchPackageInfoList } from "./lib/fetch-packages.js";
 import { processPackageData } from "./lib/process-packages.js";
@@ -26,8 +26,8 @@ async function main() {
     if (errors.length > 0) {
       for (const { package: pkg, error } of errors) {
         console.warn(
-          chalk.bgYellow.black(" WARNING "),
-          chalk.yellow(`${pkg}: ${error.message}\n`),
+          styleText(["black", "bgYellow"], " WARNING "),
+          styleText("yellow", `${pkg}: ${error.message}\n`),
         );
       }
     }
