@@ -1,5 +1,5 @@
 import fsPromises from "node:fs/promises";
-import chalk from "chalk";
+import { styleText } from "node:util";
 
 export const readPackageJson = async () => {
   let packageContent: string;
@@ -10,8 +10,10 @@ export const readPackageJson = async () => {
     });
   } catch (_error) {
     console.log(
-      chalk.redBright(
-        `[ERROR]: Cannot find ${chalk.bold(
+      styleText(
+        "redBright",
+        `[ERROR]: Cannot find ${styleText(
+          "bold",
           "package.json",
         )}. Please ensure that the file exists in the project root. \n`,
       ),
