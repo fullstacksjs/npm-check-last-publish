@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import "temporal-polyfill/global";
 import { styleText } from "node:util";
 import { getCliOptions } from "./lib/cli-options.js";
 import { fetchPackageInfoList } from "./lib/fetch-packages.js";
