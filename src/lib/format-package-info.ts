@@ -1,4 +1,3 @@
-import { differenceInDays } from "date-fns";
 import type { PackageInfo, PackagePublishInfo, Thresholds } from "../types.js";
 import { getAveragePublishDays } from "./get-average-publish-days.js";
 import { getColorArea } from "./get-color-area.js";
@@ -15,8 +14,14 @@ export function formatPackageInfo({
   const { packageName, packagePublishDate, packageVersion, publishedTimes } =
     pkg;
 
-  const diffDays = differenceInDays(new Date(), packagePublishDate);
   const averagePublishDays = getAveragePublishDays(publishedTimes);
+
+  const today = Temporal.Now.plainDateISO();
+  const publishDate = packagePublishDate
+    .toTemporalInstant()
+    .toZonedDateTimeISO("UTC");
+
+  const diffDays = today.since(publishDate).days;
 
   return {
     name: packageName,

@@ -1,7 +1,7 @@
 import { styleText } from "node:util";
 import Table from "cli-table3";
-import { formatDistance } from "date-fns";
 import type { PackageInfo } from "../types.js";
+import { formatRelativeTime } from "./format-relative-time.js";
 
 const TABLE_HEADER_TITLES = ["Name", "Version", "Date", "Average"] as const;
 
@@ -12,9 +12,8 @@ export function renderTable(packagesInfo: PackageInfo[]) {
 
   for (const pkg of packagesInfo) {
     const { area, averagePublishDays, date, name, version } = pkg;
-    const formattedDate = formatDistance(date, new Date(), {
-      addSuffix: true,
-    });
+
+    const formattedDate = formatRelativeTime(date);
 
     table.push([
       styleText(area, name),

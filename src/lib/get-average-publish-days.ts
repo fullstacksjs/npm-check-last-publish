@@ -1,5 +1,3 @@
-import { differenceInDays } from "date-fns";
-
 export const getAveragePublishDays = (
   publishedTimes: Record<string, string>,
 ) => {
@@ -13,7 +11,16 @@ export const getAveragePublishDays = (
       let nextPublishTime = publishTimesArray[index + 1];
       if (!nextPublishTime) nextPublishTime = new Date();
 
-      return differenceInDays(nextPublishTime, publishTime);
+      const nextPublishTimeDate = nextPublishTime
+        .toTemporalInstant()
+        .toZonedDateTimeISO("UTC")
+        .toPlainDate();
+
+      const publishTimeDate = publishTime
+        .toTemporalInstant()
+        .toZonedDateTimeISO("UTC");
+
+      return nextPublishTimeDate.since(publishTimeDate).days;
     })
     .reduce((a, b) => a + b, 0);
 
