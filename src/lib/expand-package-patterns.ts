@@ -1,14 +1,13 @@
-import { minimatch } from "minimatch";
-
 export function expandPackagePatterns(
   patterns: string[],
   allNames: string[],
 ): string[] {
   const matched = patterns.flatMap((pattern) => {
     if (pattern.includes("*")) {
-      return allNames.filter((pkg) =>
-        minimatch(pkg, pattern, { nocase: true }),
-      );
+      const regex = new RegExp(pattern, "i");
+      return allNames.filter((pkg) => {
+        return regex.test(pkg);
+      });
     }
     return [pattern.toLowerCase()];
   });
