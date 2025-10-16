@@ -37,6 +37,7 @@ export function getCliOptions() {
       "Days threshold for error",
       String(DEFAULT_THRESHOLDS.error),
     )
+    .option("--json", "Json Export", false)
     .helpOption("-h, --help", "Show help")
     .addHelpText(
       "after",
@@ -47,16 +48,18 @@ Examples:
   $ npm-check-last-publish --pattern "@types/*"
   $ npm-check-last-publish --pattern "react-*"
   $ npm-check-last-publish --warn-days 60 --error-days 120
+  $ npm-check-last-publish --json > report.json
 `,
     )
     .parse(process.argv);
 
-  const { sort, order, pattern, warnDays, errorDays } = program.opts<{
+  const { sort, order, pattern, warnDays, errorDays, json } = program.opts<{
     sort: SortBy;
     order: SortOrder;
     pattern: boolean;
     warnDays: number;
     errorDays: number;
+    json: boolean;
   }>();
 
   const packages = program.args;
@@ -72,5 +75,6 @@ Examples:
     sortBy: sort,
     sortOrder: order,
     thresholds,
+    jsonExport: json,
   };
 }

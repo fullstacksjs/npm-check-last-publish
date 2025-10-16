@@ -10,7 +10,7 @@ import { renderTable } from "./lib/render-table.js";
 
 async function main() {
   try {
-    const { packages, sortBy, sortOrder, pattern, thresholds } =
+    const { packages, sortBy, sortOrder, pattern, thresholds, jsonExport } =
       getCliOptions();
 
     const { results, errors } = await fetchPackageInfoList(packages, pattern);
@@ -22,7 +22,9 @@ async function main() {
       thresholds,
     });
 
-    renderTable(sortedInfo);
+    jsonExport
+      ? console.log(JSON.stringify(sortedInfo))
+      : renderTable(sortedInfo);
 
     if (errors.length > 0) {
       for (const { package: pkg, error } of errors) {
