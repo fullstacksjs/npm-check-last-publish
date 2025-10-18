@@ -10,8 +10,15 @@ import { renderTable } from "./lib/render-table.js";
 
 async function main() {
   try {
-    const { packages, sortBy, sortOrder, pattern, thresholds, jsonExport } =
-      getCliOptions();
+    const {
+      packages,
+      sortBy,
+      sortOrder,
+      pattern,
+      thresholds,
+      jsonExport,
+      csvExport,
+    } = getCliOptions();
 
     const { results, errors } = await fetchPackageInfoList(packages, pattern);
 
@@ -22,9 +29,25 @@ async function main() {
       thresholds,
     });
 
-    jsonExport
-      ? console.log(JSON.stringify(sortedInfo))
-      : renderTable(sortedInfo);
+    if (csvExport) {
+      const csvRows = [
+        Object.keys(sortedInfo[0]),
+        ...sortedInfo.map((info) => [
+          info.name,
+          info.version,
+          info.date,
+          info.diffDays,
+          info.area,
+          info.averagePublishDays,
+        ]),
+      ];
+      const csvContent = csvRows.map((row) => row.join(",")).join("\n");
+      console.log(csvContent);
+    } else if (jsonExport) {
+      console.log(JSON.stringify(sortedInfo, null, 2));
+    } else {
+      renderTable(sortedInfo);
+    }
 
     if (errors.length > 0) {
       for (const { package: pkg, error } of errors) {
