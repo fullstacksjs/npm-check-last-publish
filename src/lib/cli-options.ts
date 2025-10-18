@@ -38,6 +38,7 @@ export function getCliOptions() {
       String(DEFAULT_THRESHOLDS.error),
     )
     .option("--json", "Json Export", false)
+    .option("--csv", "CSV Export", false)
     .helpOption("-h, --help", "Show help")
     .addHelpText(
       "after",
@@ -49,18 +50,21 @@ Examples:
   $ npm-check-last-publish --pattern "react-*"
   $ npm-check-last-publish --warn-days 60 --error-days 120
   $ npm-check-last-publish --json > report.json
+  $ npm-check-last-publish --csv > report.csv
 `,
     )
     .parse(process.argv);
 
-  const { sort, order, pattern, warnDays, errorDays, json } = program.opts<{
-    sort: SortBy;
-    order: SortOrder;
-    pattern: boolean;
-    warnDays: number;
-    errorDays: number;
-    json: boolean;
-  }>();
+  const { sort, order, pattern, warnDays, errorDays, json, csv } =
+    program.opts<{
+      sort: SortBy;
+      order: SortOrder;
+      pattern: boolean;
+      warnDays: number;
+      errorDays: number;
+      json: boolean;
+      csv: boolean;
+    }>();
 
   const packages = program.args;
 
@@ -76,5 +80,6 @@ Examples:
     sortOrder: order,
     thresholds,
     jsonExport: json,
+    csvExport: csv,
   };
 }
