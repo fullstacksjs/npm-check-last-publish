@@ -5,7 +5,6 @@ import { styleText } from "node:util";
 import { getCliOptions } from "./lib/cli-options.js";
 import { fetchPackageInfoList } from "./lib/fetch-packages.js";
 import { processPackageData } from "./lib/process-packages.js";
-import { progressBar } from "./lib/progress-bar.js";
 import { renderTable } from "./lib/render-table.js";
 
 async function main() {
@@ -58,7 +57,6 @@ async function main() {
       }
     }
   } catch (err) {
-    progressBar.stop();
     console.error("Error:", err instanceof Error ? err.message : err);
     process.exit(1);
   }
