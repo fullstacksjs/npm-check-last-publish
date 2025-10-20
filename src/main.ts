@@ -3,7 +3,10 @@
 import "temporal-polyfill/global";
 import { styleText } from "node:util";
 import { getCliOptions } from "./lib/cli-options.ts";
-import { fetchPackageInfoList } from "./lib/fetch-packages.ts";
+import {
+  fetchPackageInfoList,
+  NoPackageFoundError,
+} from "./lib/fetch-packages.ts";
 import { formatPackageInfo } from "./lib/format-package-info.ts";
 import { getPackagePublishDate } from "./lib/get-package-publish-date.ts";
 import { progressBar } from "./lib/progress-bar.ts";
@@ -22,14 +25,11 @@ try {
   try {
     packagesToCheck = await fetchPackageInfoList(packages, filter);
   } catch (e) {
-    if (e instanceof Error && e.message === "FILE_NOT_FOUND") {
+    if (e instanceof NoPackageFoundError) {
       console.error(
         styleText(
           "redBright",
-          `[ERROR]: Cannot find ${styleText(
-            "bold",
-            "package.json",
-          )}. Please ensure that the file exists in your current working directory. \n`,
+          `[ERROR]: Cannot find ${styleText("bold", "package.json")}. Please ensure that the file exists in your current working directory. \n`,
         ),
       );
       process.exit(1);

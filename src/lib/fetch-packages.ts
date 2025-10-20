@@ -1,6 +1,13 @@
 import { expandPackagePatterns } from "./expand-package-patterns.ts";
 import { readPackageJson } from "./read-package-json.ts";
 
+export class NoPackageFoundError extends Error {
+  constructor() {
+    super("No packages found to check.");
+    this.name = "NoPackageFoundError";
+  }
+}
+
 export async function fetchPackageInfoList(
   inputPackages: string[],
   filter: string,
@@ -23,7 +30,7 @@ export async function fetchPackageInfoList(
   }
 
   if (packagesToCheck.length === 0) {
-    throw new Error("NO_PACKAGE_FOUND");
+    throw new NoPackageFoundError();
   }
 
   return packagesToCheck;
