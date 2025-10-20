@@ -1,4 +1,5 @@
-import type { Output, PackageInfo } from "../types.ts";
+import type { PackageInfo } from "../models/package-info.ts";
+import type { Output } from "../types.ts";
 import { renderCsv } from "./render-csv.ts";
 import { renderJSON } from "./render-json.ts";
 import { renderTable } from "./render-table.ts";

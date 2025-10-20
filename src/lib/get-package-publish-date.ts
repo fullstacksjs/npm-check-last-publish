@@ -1,15 +1,18 @@
+import type { PackagePublishInfo } from "../models/package-publish-info.ts";
 import { getPackageVersionsDetail } from "./get-package-versions-detail.ts";
 
-export const getPackagePublishDate = async (packageName: string) => {
-  try {
-    const { packageVersion, publishedTimes } =
-      await getPackageVersionsDetail(packageName);
-    const packagePublishDate = new Date(publishedTimes[packageVersion]);
-    return { packagePublishDate, packageVersion, packageName, publishedTimes };
-  } catch (error: unknown) {
-    const e = error as Error;
-    throw new Error(
-      `Failed to fetch package info for "${packageName}": ${e.message}`,
-    );
-  }
+export const getPackagePublishDate = async (
+  packageName: string,
+): Promise<PackagePublishInfo> => {
+  const { packageVersion, publishedTimes } =
+    await getPackageVersionsDetail(packageName);
+  const packagePublishDate = new Date(publishedTimes[packageVersion]);
+
+  return {
+    tag: "OK",
+    packagePublishDate,
+    packageVersion,
+    packageName,
+    publishedTimes,
+  };
 };

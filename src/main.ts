@@ -4,11 +4,15 @@ import "temporal-polyfill/global";
 import { styleText } from "node:util";
 import { getCliOptions } from "./lib/cli-options.ts";
 import { fetchPackageInfoList } from "./lib/fetch-packages.ts";
+import { formatPackageInfo } from "./lib/format-package-info.ts";
 import { getPackagePublishDate } from "./lib/get-package-publish-date.ts";
-import { processPackageData } from "./lib/process-packages.ts";
 import { progressBar } from "./lib/progress-bar.ts";
+import { sortPackages } from "./lib/sort-packages.ts";
+import {
+  errorPackagePublishInfo,
+  type PackagePublishInfo,
+} from "./models/package-publish-info.ts";
 import { mkRenderer } from "./renderer/mkRenderer.ts";
-import type { PackagePublishInfo } from "./types.ts";
 
 try {
   const { packages, sortBy, sortOrder, filter, thresholds, output } =
@@ -43,48 +47,36 @@ try {
     throw e;
   }
 
-  const errors: { package: string; error: Error }[] = [];
-  const results: (PackagePublishInfo | null)[] = [];
-
   progressBar.start(packagesToCheck.length, 0);
-  const promises = packagesToCheck.map((pkgName) =>
+  const promises = packagesToCheck.map<Promise<PackagePublishInfo>>((pkgName) =>
     getPackagePublishDate(pkgName)
-      .then(
-        (info) => {
-          results.push(info);
-        },
-        (err) => {
-          const message =
-            err instanceof Error ? err.message.split("\n")[0] : String(err);
-          errors.push({ package: pkgName, error: new Error(message) });
-          results.push(null);
-        },
-      )
-      .finally(() => {
-        progressBar.increment();
-      }),
+      .catch(() => errorPackagePublishInfo(pkgName))
+      .finally(() => progressBar.increment()),
   );
 
-  await Promise.all(promises);
+  const results = await Promise.all(promises);
   progressBar.stop();
 
-  const sortedInfo = processPackageData({
-    results: results.filter((r) => r !== null),
-    sortBy,
-    sortOrder,
-    thresholds,
-  });
+  const formatted = results.map((publishInfo) =>
+    formatPackageInfo({ publishInfo, thresholds }),
+  );
+
+  const sortedInfo = sortPackages(formatted, sortBy, sortOrder);
 
   const render = mkRenderer(output);
   console.log(render(sortedInfo));
 
-  if (errors.length > 0) {
-    for (const { package: pkg, error } of errors) {
-      console.warn(
-        styleText(["black", "bgYellow"], " WARNING "),
-        styleText("yellow", `${pkg}: ${error.message}\n`),
-      );
-    }
+  const failedPackages = results.filter((info) => info.tag === "Error");
+
+  if (failedPackages.length > 0) {
+    process.exitCode = 1;
+    console.error(
+      styleText(
+        "redBright",
+        "\n[ERROR]: Could not retrieve publish date for the following packages:\n" +
+          failedPackages.map((pkg) => `- ${pkg.packageName}`).join("\n"),
+      ),
+    );
   }
 } catch (err) {
   progressBar.stop();
