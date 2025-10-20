@@ -1,18 +1,23 @@
-import type { PackageInfo, PackagePublishInfo, Thresholds } from "../types.ts";
+import { errorPackageInfo, type PackageInfo } from "../models/package-info.ts";
+import type { PackagePublishInfo } from "../models/package-publish-info.ts";
+import type { Thresholds } from "../types.ts";
 import { getAveragePublishDays } from "./get-average-publish-days.ts";
 import { getColorArea } from "./get-color-area.ts";
 
 interface FormatPackageOptions {
-  pkg: PackagePublishInfo;
+  publishInfo: PackagePublishInfo;
   thresholds: Thresholds;
 }
 
 export function formatPackageInfo({
-  pkg,
+  publishInfo,
   thresholds,
 }: FormatPackageOptions): PackageInfo {
+  if (publishInfo.tag === "Error")
+    return errorPackageInfo(publishInfo.packageName);
+
   const { packageName, packagePublishDate, packageVersion, publishedTimes } =
-    pkg;
+    publishInfo;
 
   const averagePublishDays = getAveragePublishDays(publishedTimes);
 
