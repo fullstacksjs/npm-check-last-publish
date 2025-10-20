@@ -33,7 +33,8 @@
     "dev": "node src/main.ts",
     "prepare": "husky",
     "spell": "cspell .",
-    "test": ""
+    "test:watch": "node --watch --test 'src/**/*.spec.ts'",
+    "test": "node --test 'src/**/*.spec.ts'"
   },
   "dependencies": {
     "cli-progress": "3.12.0",
