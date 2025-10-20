@@ -1,8 +1,8 @@
-import type { PackagePublishInfo } from "../types.js";
-import { expandPackagePatterns } from "./expand-package-patterns.js";
-import { getAllDependencies } from "./get-all-dependencies.js";
-import { getPackagePublishDate } from "./get-package-publish-date.js";
-import { progressBar } from "./progress-bar.js";
+import type { PackagePublishInfo } from "../types.ts";
+import { expandPackagePatterns } from "./expand-package-patterns.ts";
+import { getAllDependencies } from "./get-all-dependencies.ts";
+import { getPackagePublishDate } from "./get-package-publish-date.ts";
+import { progressBar } from "./progress-bar.ts";
 
 type PackageInfoResult = {
   results: (PackagePublishInfo | null)[];

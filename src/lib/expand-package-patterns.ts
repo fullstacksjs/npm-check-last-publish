@@ -1,4 +1,4 @@
-import { globRegex } from "./glob-regex.js";
+import { globRegex } from "./glob-regex.ts";
 
 export function expandPackagePatterns(
   patterns: string[],

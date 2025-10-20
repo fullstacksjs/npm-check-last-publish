@@ -1,7 +1,7 @@
 import { styleText } from "node:util";
 import Table from "cli-table3";
-import type { PackageInfo } from "../types.js";
-import { formatRelativeTime } from "./format-relative-time.js";
+import type { PackageInfo } from "../types.ts";
+import { formatRelativeTime } from "./format-relative-time.ts";
 
 const TABLE_HEADER_TITLES = ["Name", "Version", "Date", "Average"] as const;
 

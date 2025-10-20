@@ -1,6 +1,6 @@
-import type { PackageInfo, PackagePublishInfo, Thresholds } from "../types.js";
-import { getAveragePublishDays } from "./get-average-publish-days.js";
-import { getColorArea } from "./get-color-area.js";
+import type { PackageInfo, PackagePublishInfo, Thresholds } from "../types.ts";
+import { getAveragePublishDays } from "./get-average-publish-days.ts";
+import { getColorArea } from "./get-color-area.ts";
 
 interface FormatPackageOptions {
   pkg: PackagePublishInfo;

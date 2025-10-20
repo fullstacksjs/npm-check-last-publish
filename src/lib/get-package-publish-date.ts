@@ -1,4 +1,4 @@
-import { getPackageVersionsDetail } from "./get-package-versions-detail.js";
+import { getPackageVersionsDetail } from "./get-package-versions-detail.ts";
 
 export const getPackagePublishDate = async (packageName: string) => {
   try {

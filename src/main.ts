@@ -2,11 +2,11 @@
 
 import "temporal-polyfill/global";
 import { styleText } from "node:util";
-import { getCliOptions } from "./lib/cli-options.js";
-import { fetchPackageInfoList } from "./lib/fetch-packages.js";
-import { processPackageData } from "./lib/process-packages.js";
-import { progressBar } from "./lib/progress-bar.js";
-import { renderTable } from "./lib/render-table.js";
+import { getCliOptions } from "./lib/cli-options.ts";
+import { fetchPackageInfoList } from "./lib/fetch-packages.ts";
+import { processPackageData } from "./lib/process-packages.ts";
+import { progressBar } from "./lib/progress-bar.ts";
+import { renderTable } from "./lib/render-table.ts";
 
 try {
   const { packages, sortBy, sortOrder, pattern, thresholds, output } =

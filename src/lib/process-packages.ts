@@ -3,9 +3,9 @@ import type {
   SortBy,
   SortOrder,
   Thresholds,
-} from "../types.js";
-import { formatPackageInfo } from "./format-package-info.js";
-import { sortPackages } from "./sort-packages.js";
+} from "../types.ts";
+import { formatPackageInfo } from "./format-package-info.ts";
+import { sortPackages } from "./sort-packages.ts";
 
 interface ProcessPackageOptions {
   results: PackagePublishInfo[];

@@ -1,4 +1,4 @@
-import { readPackageJson } from "./read-package-json.js";
+import { readPackageJson } from "./read-package-json.ts";
 
 export const getAllDependencies = async () => {
   const packageJSON = await readPackageJson();
