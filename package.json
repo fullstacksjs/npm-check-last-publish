@@ -36,9 +36,9 @@
     "test": ""
   },
   "dependencies": {
-    "cli-progress": "3.12.0",
     "cli-table3": "0.6.5",
     "commander": "14.0.0",
+    "log-update": "7.0.1",
     "temporal-polyfill": "0.3.0"
   },
   "devDependencies": {
@@ -48,7 +48,6 @@
     "@semantic-release/github": "11.0.3",
     "@semantic-release/npm": "12.0.2",
     "@semantic-release/release-notes-generator": "14.0.3",
-    "@types/cli-progress": "3.11.6",
     "@types/node": "24.1.0",
     "cspell": "9.2.0",
     "husky": "9.1.7",

@@ -2,7 +2,7 @@ import type { PackagePublishInfo } from "../types.js";
 import { expandPackagePatterns } from "./expand-package-patterns.js";
 import { getAllDependencies } from "./get-all-dependencies.js";
 import { getPackagePublishDate } from "./get-package-publish-date.js";
-import { progressBar } from "./progress-bar.js";
+import { getProgressBar } from "./progress-bar.js";
 
 type PackageInfoResult = {
   results: (PackagePublishInfo | null)[];
@@ -33,7 +33,7 @@ export async function fetchPackageInfoList(
   const errors: { package: string; error: Error }[] = [];
   const results: (PackagePublishInfo | null)[] = [];
 
-  progressBar.start(packagesToCheck.length, 0);
+  const progressBar = getProgressBar(packagesToCheck.length);
 
   for (const pkgName of packagesToCheck) {
     try {
