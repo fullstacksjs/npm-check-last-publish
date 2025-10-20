@@ -19,6 +19,7 @@ export type PackagePublishInfo = {
 
 export type SortBy = "name" | "date" | "average";
 export type SortOrder = "asc" | "desc";
+export type Output = "table" | "json" | "csv";
 export interface Thresholds {
   warn: number;
   error: number;

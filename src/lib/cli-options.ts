@@ -1,10 +1,12 @@
 import { Command } from "commander";
 import pkg from "../../package.json" with { type: "json" };
-import type { SortBy, SortOrder, Thresholds } from "../types.js";
+import type { Output, SortBy, SortOrder, Thresholds } from "../types.js";
 import {
   DEFAULT_ORDER,
+  DEFAULT_OUTPUT,
   DEFAULT_SORT,
   DEFAULT_THRESHOLDS,
+  VALID_OUTPUT,
   VALID_SORT_BY,
   VALID_SORT_ORDER,
 } from "./constants.js";
@@ -37,8 +39,11 @@ export function getCliOptions() {
       "Days threshold for error",
       String(DEFAULT_THRESHOLDS.error),
     )
-    .option("--json", "Json Export", false)
-    .option("--csv", "CSV Export", false)
+    .option(
+      "--output <OUTPUT>",
+      `Output: ${VALID_OUTPUT.join(", ")}`,
+      DEFAULT_OUTPUT,
+    )
     .helpOption("-h, --help", "Show help")
     .addHelpText(
       "after",
@@ -49,22 +54,20 @@ Examples:
   $ npm-check-last-publish --pattern "@types/*"
   $ npm-check-last-publish --pattern "react-*"
   $ npm-check-last-publish --warn-days 60 --error-days 120
-  $ npm-check-last-publish --json > report.json
-  $ npm-check-last-publish --csv > report.csv
+  $ npm-check-last-publish --output json > report.json
+  $ npm-check-last-publish --output csv > report.csv
 `,
     )
     .parse(process.argv);
 
-  const { sort, order, pattern, warnDays, errorDays, json, csv } =
-    program.opts<{
-      sort: SortBy;
-      order: SortOrder;
-      pattern: boolean;
-      warnDays: number;
-      errorDays: number;
-      json: boolean;
-      csv: boolean;
-    }>();
+  const { sort, order, pattern, warnDays, errorDays, output } = program.opts<{
+    sort: SortBy;
+    order: SortOrder;
+    pattern: boolean;
+    warnDays: number;
+    errorDays: number;
+    output: Output;
+  }>();
 
   const packages = program.args;
 
@@ -79,7 +82,6 @@ Examples:
     sortBy: sort,
     sortOrder: order,
     thresholds,
-    jsonExport: json,
-    csvExport: csv,
+    output,
   };
 }
