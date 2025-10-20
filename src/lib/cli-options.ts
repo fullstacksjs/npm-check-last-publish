@@ -1,6 +1,6 @@
 import { Command } from "commander";
 import pkg from "../../package.json" with { type: "json" };
-import type { Output, SortBy, SortOrder, Thresholds } from "../types.js";
+import type { Output, SortBy, SortOrder, Thresholds } from "../types.ts";
 import {
   DEFAULT_ORDER,
   DEFAULT_OUTPUT,
@@ -9,7 +9,7 @@ import {
   VALID_OUTPUT,
   VALID_SORT_BY,
   VALID_SORT_ORDER,
-} from "./constants.js";
+} from "./constants.ts";
 
 export function getCliOptions() {
   const program = new Command()

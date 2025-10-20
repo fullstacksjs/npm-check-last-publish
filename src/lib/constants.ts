@@ -5,7 +5,7 @@ import type {
   SortOrder,
   TerminalColor,
   Thresholds,
-} from "../types.js";
+} from "../types.ts";
 
 export const DEFAULT_THRESHOLDS: Thresholds = {
   warn: 180,
