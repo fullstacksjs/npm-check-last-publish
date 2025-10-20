@@ -6,7 +6,7 @@ import { getCliOptions } from "./lib/cli-options.ts";
 import { fetchPackageInfoList } from "./lib/fetch-packages.ts";
 import { processPackageData } from "./lib/process-packages.ts";
 import { progressBar } from "./lib/progress-bar.ts";
-import { renderTable } from "./lib/render-table.ts";
+import { mkRenderer } from "./renderer/mkRenderer.ts";
 
 try {
   const { packages, sortBy, sortOrder, pattern, thresholds, output } =
@@ -21,25 +21,8 @@ try {
     thresholds,
   });
 
-  if (output === "csv") {
-    const csvRows = [
-      Object.keys(sortedInfo[0]),
-      ...sortedInfo.map((info) => [
-        info.name,
-        info.version,
-        info.date,
-        info.diffDays,
-        info.area,
-        info.averagePublishDays,
-      ]),
-    ];
-    const csvContent = csvRows.map((row) => row.join(",")).join("\n");
-    console.log(csvContent);
-  } else if (output === "json") {
-    console.log(JSON.stringify(sortedInfo, null, 2));
-  } else {
-    renderTable(sortedInfo);
-  }
+  const render = mkRenderer(output);
+  console.log(render(sortedInfo));
 
   if (errors.length > 0) {
     for (const { package: pkg, error } of errors) {
