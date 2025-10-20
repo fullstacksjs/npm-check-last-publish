@@ -1,4 +1,4 @@
-import type { PackageInfo } from "../types.ts";
+import type { Output, PackageInfo } from "../types.ts";
 import { renderCsv } from "./render-csv.ts";
 import { renderJSON } from "./render-json.ts";
 import { renderTable } from "./render-table.ts";
@@ -11,7 +11,7 @@ const rendererMap: Record<string, Renderer> = {
   json: renderJSON,
 };
 
-export function mkRenderer(format: "table" | "csv" | "json"): Renderer {
+export function mkRenderer(format: Output): Renderer {
   const renderer = rendererMap[format];
   if (!renderer) throw new Error(`Unsupported format: ${format}`);
 

@@ -9,7 +9,7 @@ export function getColorArea({
   diffDays,
   thresholds,
 }: GetColorAreaOptions): TerminalColor {
-  if (diffDays >= thresholds.error) return AREA_COLORS.error;
+  if (diffDays >= thresholds.critical) return AREA_COLORS.error;
   if (diffDays >= thresholds.warn) return AREA_COLORS.warn;
   return AREA_COLORS.safe;
 }

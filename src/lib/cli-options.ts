@@ -11,13 +11,21 @@ import {
   VALID_SORT_ORDER,
 } from "./constants.ts";
 
+type CliOptions = {
+  sort: SortBy;
+  order: SortOrder;
+  filter: string;
+  warnDays: number;
+  errorDays: number;
+  output: Output;
+};
+
 export function getCliOptions() {
   const program = new Command()
     .name(pkg.name)
     .description(pkg.description)
     .version(pkg.version)
-    .usage("[packages...] [options]")
-    .argument("[packages...]", "Optional. Names of packages to check.")
+    .argument("[<packages>...]", "Optional. Names of packages to check.")
     .option(
       "--sort <TYPE>",
       `Sort by: ${VALID_SORT_BY.join(", ")}`,
@@ -28,7 +36,10 @@ export function getCliOptions() {
       `Sort order: ${VALID_SORT_ORDER.join(", ")}`,
       DEFAULT_ORDER,
     )
-    .option("--pattern", "Enable wildcard pattern matching for package names")
+    .option(
+      "--filter <FILTER>",
+      "filter packages by wildcard pattern matching from package.json file",
+    )
     .option(
       "--warn-days <NUMBER>",
       "Days threshold for warning",
@@ -36,8 +47,8 @@ export function getCliOptions() {
     )
     .option(
       "--error-days <NUMBER>",
-      "Days threshold for error",
-      String(DEFAULT_THRESHOLDS.error),
+      "Days threshold for critical",
+      String(DEFAULT_THRESHOLDS.critical),
     )
     .option(
       "--output <OUTPUT>",
@@ -51,8 +62,8 @@ export function getCliOptions() {
 Examples:
   $ npm-check-last-publish --sort name --order asc
   $ npm-check-last-publish --sort average
-  $ npm-check-last-publish --pattern "@types/*"
-  $ npm-check-last-publish --pattern "react-*"
+  $ npm-check-last-publish --filter "@types/*"
+  $ npm-check-last-publish --filter "react-*"
   $ npm-check-last-publish --warn-days 60 --error-days 120
   $ npm-check-last-publish --output json > report.json
   $ npm-check-last-publish --output csv > report.csv
@@ -60,25 +71,25 @@ Examples:
     )
     .parse(process.argv);
 
-  const { sort, order, pattern, warnDays, errorDays, output } = program.opts<{
-    sort: SortBy;
-    order: SortOrder;
-    pattern: boolean;
-    warnDays: number;
-    errorDays: number;
-    output: Output;
-  }>();
+  const {
+    sort,
+    order,
+    filter: pattern,
+    warnDays,
+    errorDays,
+    output,
+  } = program.opts<CliOptions>();
 
   const packages = program.args;
 
   const thresholds: Thresholds = {
     warn: warnDays,
-    error: errorDays,
+    critical: errorDays,
   };
 
   return {
     packages,
-    pattern,
+    filter: pattern,
     sortBy: sort,
     sortOrder: order,
     thresholds,

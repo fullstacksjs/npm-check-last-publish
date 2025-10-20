@@ -1,24 +1,13 @@
 import fsPromises from "node:fs/promises";
-import { styleText } from "node:util";
 
 export const readPackageJson = async () => {
   let packageContent: string;
-
   try {
     packageContent = await fsPromises.readFile("package.json", {
       encoding: "utf8",
     });
-  } catch (_error) {
-    console.log(
-      styleText(
-        "redBright",
-        `[ERROR]: Cannot find ${styleText(
-          "bold",
-          "package.json",
-        )}. Please ensure that the file exists in the project root. \n`,
-      ),
-    );
-    return {};
+  } catch (err) {
+    throw new Error("FILE_NOT_FOUND", { cause: err });
   }
 
   const packageJSON: {
