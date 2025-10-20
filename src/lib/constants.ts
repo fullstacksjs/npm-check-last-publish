@@ -9,7 +9,7 @@ import type {
 
 export const DEFAULT_THRESHOLDS: Thresholds = {
   warn: 180,
-  error: 365,
+  critical: 365,
 };
 
 export const AREA_COLORS: Record<Area, TerminalColor> = {

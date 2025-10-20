@@ -1,4 +1,4 @@
-import type { PackageInfo, SortBy, SortOrder } from "../types.ts";
+import type { PackageInfo, SortBy, SortOrder } from "../types.js";
 
 export function sortPackages(
   list: PackageInfo[],

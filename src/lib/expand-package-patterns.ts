@@ -1,17 +1,14 @@
 import { globRegex } from "./glob-regex.ts";
 
 export function expandPackagePatterns(
-  patterns: string[],
+  pattern: string,
   allNames: string[],
 ): string[] {
-  const matched = patterns.flatMap((pattern) => {
-    if (pattern.includes("*")) {
-      const regex = globRegex(pattern);
-      return allNames.filter((pkg) => {
-        return regex.test(pkg);
-      });
-    }
-    return [pattern.toLowerCase()];
+  if (!pattern.includes("*")) return [pattern];
+
+  const regex = globRegex(pattern);
+  const matched = allNames.filter((pkg) => {
+    return regex.test(pkg);
   });
   return [...new Set(matched)];
 }

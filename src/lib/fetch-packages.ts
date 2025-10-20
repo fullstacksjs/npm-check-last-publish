@@ -1,8 +1,9 @@
+import { styleText } from "node:util";
 import type { PackagePublishInfo } from "../types.ts";
 import { expandPackagePatterns } from "./expand-package-patterns.ts";
-import { getAllDependencies } from "./get-all-dependencies.ts";
 import { getPackagePublishDate } from "./get-package-publish-date.ts";
 import { progressBar } from "./progress-bar.ts";
+import { readPackageJson } from "./read-package-json.ts";
 
 type PackageInfoResult = {
   results: (PackagePublishInfo | null)[];
@@ -11,17 +12,38 @@ type PackageInfoResult = {
 
 export async function fetchPackageInfoList(
   inputPackages: string[],
-  pattern: boolean,
+  filter: string,
 ): Promise<PackageInfoResult> {
-  const allDeps = await getAllDependencies();
-  const allPackageNames = Object.keys(allDeps);
-
   let packagesToCheck: string[];
 
-  if (inputPackages.length === 0) {
-    packagesToCheck = allPackageNames;
-  } else if (pattern) {
-    packagesToCheck = expandPackagePatterns(inputPackages, allPackageNames);
+  const shouldReadFromPackage = inputPackages.length === 0 || filter;
+  if (shouldReadFromPackage) {
+    try {
+      const packageJSON = await readPackageJson();
+      const allDependencies = {
+        ...packageJSON.dependencies,
+        ...packageJSON.devDependencies,
+      };
+      packagesToCheck = Object.keys(allDependencies);
+      packagesToCheck = filter
+        ? expandPackagePatterns(filter, packagesToCheck)
+        : packagesToCheck;
+    } catch (e) {
+      if (e instanceof Error && e.message === "FILE_NOT_FOUND") {
+        console.error(
+          styleText(
+            "redBright",
+            `[ERROR]: Cannot find ${styleText(
+              "bold",
+              "package.json",
+            )}. Please ensure that the file exists in your current working directory. \n`,
+          ),
+        );
+        process.exit(1);
+      }
+
+      throw e;
+    }
   } else {
     packagesToCheck = inputPackages.map((p) => p.toLowerCase());
   }

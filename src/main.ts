@@ -9,10 +9,10 @@ import { progressBar } from "./lib/progress-bar.ts";
 import { mkRenderer } from "./renderer/mkRenderer.ts";
 
 try {
-  const { packages, sortBy, sortOrder, pattern, thresholds, output } =
+  const { packages, sortBy, sortOrder, filter, thresholds, output } =
     getCliOptions();
 
-  const { results, errors } = await fetchPackageInfoList(packages, pattern);
+  const { results, errors } = await fetchPackageInfoList(packages, filter);
 
   const sortedInfo = processPackageData({
     results: results.filter((r) => r !== null),
