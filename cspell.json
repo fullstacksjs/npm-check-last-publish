@@ -3,5 +3,5 @@
   "version": "0.2",
   "ignorePaths": ["node_modules", "package.json", "*.svg"],
   "language": "en",
-  "words": ["Fullstacks", "codepaths", "nocase"]
+  "words": ["Fullstacks", "fullstacksjs", "codepaths", "nocase"]
 }

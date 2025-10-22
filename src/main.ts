@@ -1,7 +1,11 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 import "temporal-polyfill/global";
 import { styleText } from "node:util";
+
+import type { PackagePublishInfo } from "./models/package-publish-info.ts";
+
 import { getCliOptions } from "./lib/cli-options.ts";
 import {
   fetchPackageInfoList,
@@ -11,10 +15,7 @@ import { formatPackageInfo } from "./lib/format-package-info.ts";
 import { getPackagePublishDate } from "./lib/get-package-publish-date.ts";
 import { progressBar } from "./lib/progress-bar.ts";
 import { sortPackages } from "./lib/sort-packages.ts";
-import {
-  errorPackagePublishInfo,
-  type PackagePublishInfo,
-} from "./models/package-publish-info.ts";
+import { errorPackagePublishInfo } from "./models/package-publish-info.ts";
 import { mkRenderer } from "./renderer/mkRenderer.ts";
 
 try {
@@ -73,8 +74,9 @@ try {
     console.error(
       styleText(
         "redBright",
-        "\n[ERROR]: Could not retrieve publish date for the following packages:\n" +
-          failedPackages.map((pkg) => `- ${pkg.packageName}`).join("\n"),
+        `\n[ERROR]: Could not retrieve publish date for the following packages:\n${failedPackages
+          .map((pkg) => `- ${pkg.packageName}`)
+          .join("\n")}`,
       ),
     );
   }

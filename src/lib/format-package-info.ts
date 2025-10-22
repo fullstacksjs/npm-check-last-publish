@@ -1,6 +1,8 @@
-import { errorPackageInfo, type PackageInfo } from "../models/package-info.ts";
+import type { PackageInfo } from "../models/package-info.ts";
 import type { PackagePublishInfo } from "../models/package-publish-info.ts";
 import type { Thresholds } from "../types.ts";
+
+import { errorPackageInfo } from "../models/package-info.ts";
 import { getAveragePublishDays } from "./get-average-publish-days.ts";
 import { getColorArea } from "./get-color-area.ts";
 

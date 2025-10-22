@@ -1,9 +1,9 @@
-export type Area = "safe" | "warn" | "error";
-export type TerminalColor = "green" | "yellow" | "red";
+export type Area = "error" | "safe" | "warn";
+export type TerminalColor = "green" | "red" | "yellow";
 
-export type SortBy = "name" | "date" | "average";
+export type SortBy = "average" | "date" | "name";
 export type SortOrder = "asc" | "desc";
-export type Output = "table" | "json" | "csv";
+export type Output = "csv" | "json" | "table";
 export interface Thresholds {
   warn: number;
   critical: number;

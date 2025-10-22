@@ -29,7 +29,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "check": "biome check . --write",
+    "lint": "eslint .",
     "dev": "node src/main.ts",
     "prepare": "husky",
     "spell": "cspell .",
@@ -43,18 +43,20 @@
     "temporal-polyfill": "0.3.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.2",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
+    "@fullstacksjs/eslint-config": "13.8.2",
     "@semantic-release/github": "11.0.3",
     "@semantic-release/npm": "12.0.2",
     "@semantic-release/release-notes-generator": "14.0.3",
     "@types/cli-progress": "3.11.6",
     "@types/node": "24.1.0",
     "cspell": "9.2.0",
+    "eslint": "9.38.0",
     "husky": "9.1.7",
+    "prettier": "3.6.2",
     "semantic-release": "24.2.7",
-    "typescript": "5.8.3"
+    "typescript": "5.9.3"
   },
   "volta": {
     "node": "22.20.0",

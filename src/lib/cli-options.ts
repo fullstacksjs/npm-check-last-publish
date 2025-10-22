@@ -1,6 +1,8 @@
 import { Command } from "commander";
-import pkg from "../../package.json" with { type: "json" };
+
 import type { Output, SortBy, SortOrder, Thresholds } from "../types.ts";
+
+import pkg from "../../package.json" with { type: "json" };
 import {
   DEFAULT_ORDER,
   DEFAULT_OUTPUT,
@@ -11,14 +13,14 @@ import {
   VALID_SORT_ORDER,
 } from "./constants.ts";
 
-type CliOptions = {
+interface CliOptions {
   sort: SortBy;
   order: SortOrder;
   filter: string;
   warnDays: number;
   errorDays: number;
   output: Output;
-};
+}
 
 export function getCliOptions() {
   const program = new Command()

@@ -1,5 +1,5 @@
-import { styleText } from "node:util";
 import cliProgress from "cli-progress";
+import { styleText } from "node:util";
 
 export const progressBar = new cliProgress.SingleBar(
   {

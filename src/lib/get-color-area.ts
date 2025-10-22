@@ -1,5 +1,7 @@
 import type { TerminalColor, Thresholds } from "../types.ts";
+
 import { AREA_COLORS } from "./constants.ts";
+
 export interface GetColorAreaOptions {
   diffDays: number;
   thresholds: Thresholds;
