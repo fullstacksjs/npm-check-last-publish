@@ -1,10 +1,10 @@
 import { exec } from "node:child_process";
 import util from "node:util";
 
-type PackageVersionsDetail = {
+interface PackageVersionsDetail {
   time: Record<string, string>;
   version: string;
-};
+}
 
 const execPromise = util.promisify(exec);
 
