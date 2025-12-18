@@ -73,14 +73,8 @@ Examples:
     )
     .parse(process.argv);
 
-  const {
-    sort,
-    order,
-    filter: pattern,
-    warnDays,
-    errorDays,
-    output,
-  } = program.opts<CliOptions>();
+  const { sort, order, filter, warnDays, errorDays, output } =
+    program.opts<CliOptions>();
 
   const packages = program.args;
 
@@ -91,7 +85,7 @@ Examples:
 
   return {
     packages,
-    filter: pattern,
+    filter,
     sortBy: sort,
     sortOrder: order,
     thresholds,

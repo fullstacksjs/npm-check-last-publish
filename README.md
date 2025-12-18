@@ -14,7 +14,7 @@ A simple CLI tool that helps developers check the last published versions of the
 - Displays outdated dependencies in a clear table format.
 - Shows the last published time, average and version of each dependency.
 - Helps developers keep their dependencies up to date.
-- Supports wildcard pattern matching for package names.
+- Supports filter for package names.
 - Customizable warning/error day thresholds.
 
 ![report screenshot](https://github.com/fullstacksjs/npm-check-last-publish/blob/main/assets/demo.png?raw=true)
@@ -37,13 +37,13 @@ npx npm-check-last-publish zod react
 
 ## CLI Options
 
-| Option                  | Description                                        | Default | Allowed Values                                  |
-| ----------------------- | -------------------------------------------------- | ------- | ----------------------------------------------- |
-| `--sort <TYPE>`         | Sort packages by a specific field                  | `date`  | `name`, `date`, `average`                       |
-| `--order <DIR>`         | Sort direction (ascending or descending)           | `asc`   | `asc`, `desc`                                   |
-| `--pattern`             | Enable wildcard pattern matching for package names | (off)   | Glob pattern, e.g., `"react-*"` or `"@types/*"` |
-| `--warn-days <NUMBER>`  | Days threshold for warning                         | `180`   | Any positive integer                            |
-| `--error-days <NUMBER>` | Days threshold for error                           | `365`   | Any positive integer                            |
+| Option                  | Description                                                      | Default | Allowed Values                              |
+| ----------------------- | ---------------------------------------------------------------- | ------- | ------------------------------------------- |
+| `--sort <TYPE>`         | Sort packages by a specific field                                | `date`  | `name`, `date`, `average`                   |
+| `--order <DIR>`         | Sort direction (ascending or descending)                         | `asc`   | `asc`, `desc`                               |
+| `--filter`              | filter packages by regex pattern matching from package.json file | (off)   | Regex, e.g., `"react.*"` or `"^@types.*s$"` |
+| `--warn-days <NUMBER>`  | Days threshold for warning                                       | `180`   | Any positive integer                        |
+| `--error-days <NUMBER>` | Days threshold for error                                         | `365`   | Any positive integer                        |
 
 ## Examples
 
@@ -59,14 +59,10 @@ npx npm-check-last-publish --sort name
 npx npm-check-last-publish --sort average --order desc zod react cspell
 ```
 
-#### Check packages matching a wildcard pattern
+#### Check packages with a regex filter
 
 ```bash
-npx npm-check-last-publish --pattern "@types/*"
-```
-
-```bash
-npx npm-check-last-publish --pattern "react-*"
+npx npm-check-last-publish --filter "^@types.*$"
 ```
 
 #### Customize warning and error thresholds
