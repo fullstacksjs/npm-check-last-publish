@@ -13,15 +13,13 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22.20.0
-
+          node-version-file: package.json
       - run: npm ci
       - run: npm test
       - run: npm run build
-
       - name: Release
         run: npx semantic-release
         env:
