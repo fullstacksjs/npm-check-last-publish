@@ -2,6 +2,7 @@ import fsPromises from "node:fs/promises";
 
 export const readPackageJson = async () => {
   let packageContent: string;
+
   try {
     packageContent = await fsPromises.readFile("package.json", {
       encoding: "utf8",

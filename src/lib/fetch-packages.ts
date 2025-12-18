@@ -15,6 +15,7 @@ export async function fetchPackageInfoList(
   let packagesToCheck: string[];
 
   const shouldReadFromPackage = inputPackages.length === 0 || filter;
+
   if (shouldReadFromPackage) {
     const packageJSON = await readPackageJson();
     const allDependencies = {
