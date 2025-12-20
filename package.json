@@ -26,8 +26,7 @@
   ],
   "publishConfig": {
     "access": "public",
-    "provenance": true,
-    "registry": "https://registry.npmjs.org"
+    "provenance": true
   },
   "scripts": {
     "build": "tsc",
