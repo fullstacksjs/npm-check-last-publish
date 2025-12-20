@@ -1,6 +1,8 @@
 import { Command } from "commander";
-import pkg from "../../package.json" with { type: "json" };
+
 import type { Output, SortBy, SortOrder, Thresholds } from "../types.ts";
+
+import pkg from "../../package.json" with { type: "json" };
 import {
   DEFAULT_ORDER,
   DEFAULT_OUTPUT,
@@ -11,14 +13,14 @@ import {
   VALID_SORT_ORDER,
 } from "./constants.ts";
 
-type CliOptions = {
+interface CliOptions {
   sort: SortBy;
   order: SortOrder;
   filter: string;
   warnDays: number;
   errorDays: number;
   output: Output;
-};
+}
 
 export function getCliOptions() {
   const program = new Command()
@@ -38,7 +40,7 @@ export function getCliOptions() {
     )
     .option(
       "--filter <FILTER>",
-      "filter packages by wildcard pattern matching from package.json file",
+      "filter packages by regex pattern matching from package.json file",
     )
     .option(
       "--warn-days <NUMBER>",
@@ -62,8 +64,8 @@ export function getCliOptions() {
 Examples:
   $ npm-check-last-publish --sort name --order asc
   $ npm-check-last-publish --sort average
-  $ npm-check-last-publish --filter "@types/*"
-  $ npm-check-last-publish --filter "react-*"
+  $ npm-check-last-publish --filter @types
+  $ npm-check-last-publish --filter "^react.*s$"
   $ npm-check-last-publish --warn-days 60 --error-days 120
   $ npm-check-last-publish --output json > report.json
   $ npm-check-last-publish --output csv > report.csv
@@ -71,14 +73,8 @@ Examples:
     )
     .parse(process.argv);
 
-  const {
-    sort,
-    order,
-    filter: pattern,
-    warnDays,
-    errorDays,
-    output,
-  } = program.opts<CliOptions>();
+  const { sort, order, filter, warnDays, errorDays, output } =
+    program.opts<CliOptions>();
 
   const packages = program.args;
 
@@ -89,7 +85,7 @@ Examples:
 
   return {
     packages,
-    filter: pattern,
+    filter,
     sortBy: sort,
     sortOrder: order,
     thresholds,

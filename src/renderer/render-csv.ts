@@ -1,4 +1,4 @@
-import type { PackageInfo } from "../types.ts";
+import type { PackageInfo } from "../models/package-info.ts";
 
 export function renderCsv(objects: PackageInfo[]): string {
   if (Object.keys(objects).length === 0) {

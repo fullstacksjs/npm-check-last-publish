@@ -1,6 +1,6 @@
 set -e
 
-npx --no-install biome check --staged --no-errors-on-unmatched
+npm run lint
 npm run spell
 npm run test
 npm run build

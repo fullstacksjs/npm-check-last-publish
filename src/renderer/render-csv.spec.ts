@@ -1,5 +1,6 @@
 import assert from "node:assert";
 import { test } from "node:test";
+
 import { renderCsv } from "./render-csv.ts";
 
 test("should render csv with multiple objects", () => {
