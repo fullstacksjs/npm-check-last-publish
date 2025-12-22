@@ -10,7 +10,7 @@ export class NoPackageFoundError extends Error {
 
 export async function fetchPackageInfoList(
   inputPackages: string[],
-  filter: string,
+  filter?: string,
 ): Promise<string[]> {
   let packagesToCheck: string[];
 

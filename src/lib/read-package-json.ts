@@ -1,4 +1,12 @@
 import fsPromises from "node:fs/promises";
+import * as z from "zod";
+
+const PackageJsonSchema = z.object({
+  dependencies: z.record(z.string(), z.string()).optional(),
+  devDependencies: z.record(z.string(), z.string()).optional(),
+});
+
+export type PackageJson = z.infer<typeof PackageJsonSchema>;
 
 export const readPackageJson = async () => {
   let packageContent: string;
@@ -11,10 +19,7 @@ export const readPackageJson = async () => {
     throw new Error("FILE_NOT_FOUND", { cause: err });
   }
 
-  const packageJSON: {
-    dependencies?: Record<string, string>;
-    devDependencies?: Record<string, string>;
-  } = JSON.parse(packageContent);
+  const packageJSON = PackageJsonSchema.parse(JSON.parse(packageContent));
 
   return packageJSON;
 };

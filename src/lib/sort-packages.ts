@@ -27,7 +27,7 @@ export function sortPackages(
         result = a.averagePublishDays - b.averagePublishDays;
         break;
 
-      default:
+      case "date":
         if (a.date == null) {
           result = -1;
           break;
