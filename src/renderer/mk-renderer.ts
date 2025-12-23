@@ -14,8 +14,5 @@ const rendererMap: Record<string, Renderer> = {
 };
 
 export function mkRenderer(format: Output): Renderer {
-  const renderer = rendererMap[format];
-  if (!renderer) throw new Error(`Unsupported format: ${format}`);
-
-  return renderer;
+  return rendererMap[format];
 }
