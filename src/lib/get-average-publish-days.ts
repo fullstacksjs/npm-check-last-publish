@@ -1,29 +1,29 @@
 export const getAveragePublishDays = (
   publishedTimes: Record<string, string>,
 ) => {
-  const publishTimesList = Object.values(publishedTimes);
-  const totalPublishTimeDays = publishTimesList
-    .map((publishTime) => new Date(publishTime))
-    .sort((a, b) => {
-      return a.getTime() - b.getTime();
-    })
-    .map((publishTime, index, publishTimesArray) => {
-      let nextPublishTime = publishTimesArray[index + 1];
-      if (!nextPublishTime) nextPublishTime = new Date();
+  const publishTimesList = Object.values(publishedTimes)
+    .map((publishTime) => Temporal.Instant.from(publishTime))
+    .sort((a, b) => a.epochMilliseconds - b.epochMilliseconds);
 
-      const nextPublishTimeDate = nextPublishTime
-        .toTemporalInstant()
+  if (publishTimesList.length < 2) return 0;
+
+  const totalDaysBetweenReleases = publishTimesList
+    .map((publishTime, index, publishTimesArray) => {
+      const nextPublishTime = publishTimesArray[index + 1];
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      if (!nextPublishTime) return 0;
+
+      const publishTimeDate = publishTime
         .toZonedDateTimeISO("UTC")
         .toPlainDate();
 
-      const publishTimeDate = publishTime
-        .toTemporalInstant()
-        .toZonedDateTimeISO("UTC");
+      const nextPublishTimeDate = nextPublishTime
+        .toZonedDateTimeISO("UTC")
+        .toPlainDate();
 
       return nextPublishTimeDate.since(publishTimeDate).days;
     })
-    .reduce((a, b) => a + b, 0);
+    .reduce((sum, days) => sum + days, 0);
 
-  const days = Math.round(totalPublishTimeDays / publishTimesList.length);
-  return days;
+  return Math.round(totalDaysBetweenReleases / (publishTimesList.length - 1));
 };
