@@ -1,0 +1,10 @@
+import { defineConfig } from "cspell";
+
+export default defineConfig({
+  $schema:
+    "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  version: "0.2",
+  ignorePaths: ["node_modules", "package.json", "*.svg"],
+  language: "en",
+  words: ["Fullstacks", "fullstacksjs", "codepaths", "nocase"],
+});
