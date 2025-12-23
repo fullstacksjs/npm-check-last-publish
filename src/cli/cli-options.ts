@@ -11,7 +11,9 @@ import {
   VALID_OUTPUT,
   VALID_SORT_BY,
   VALID_SORT_ORDER,
-} from "./constants.ts";
+} from "../lib/constants.ts";
+import { cliSchema } from "./cli-schema.ts";
+import { handleZodError } from "./handle-zod-error.ts";
 
 interface CliOptions {
   sort: SortBy;
@@ -73,10 +75,16 @@ Examples:
     )
     .parse(process.argv);
 
-  const { sort, order, filter, warnDays, errorDays, output } =
-    program.opts<CliOptions>();
-
+  const rawOptions = program.opts<CliOptions>();
   const packages = program.args;
+
+  const result = cliSchema.safeParse(rawOptions);
+
+  if (!result.success) {
+    handleZodError(result.error);
+  }
+
+  const { errorDays, filter, order, output, sort, warnDays } = result.data;
 
   const thresholds: Thresholds = {
     warn: warnDays,

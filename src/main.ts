@@ -6,7 +6,7 @@ import { styleText } from "node:util";
 
 import type { PackagePublishInfo } from "./models/package-publish-info.ts";
 
-import { getCliOptions } from "./lib/cli-options.ts";
+import { getCliOptions } from "./cli/cli-options.ts";
 import {
   fetchPackageInfoList,
   NoPackageFoundError,
@@ -16,7 +16,7 @@ import { getPackagePublishDate } from "./lib/get-package-publish-date.ts";
 import { progressBar } from "./lib/progress-bar.ts";
 import { sortPackages } from "./lib/sort-packages.ts";
 import { errorPackagePublishInfo } from "./models/package-publish-info.ts";
-import { mkRenderer } from "./renderer/mkRenderer.ts";
+import { mkRenderer } from "./renderer/mk-renderer.ts";
 
 try {
   const { packages, sortBy, sortOrder, filter, thresholds, output } =
